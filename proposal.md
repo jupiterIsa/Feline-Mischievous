@@ -1,6 +1,6 @@
 \## Title Feline Mischievous
 
-\## Repository \<https://github.com/jupiterIsa/Feline-Mischievous.git>
+\## Repository \ https://github.com/jupiterIsa/Feline-Mischievous.git
 
 \## Description A simple 2D platformer where you control a cat that
 destroys objects, the goal is to destroy as many items possible within a
