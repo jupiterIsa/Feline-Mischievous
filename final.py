@@ -31,6 +31,10 @@ class Player():
         self.gravity -= self.gravityStrength * dt
         dy = -self.gravity
 
+        self.pos = (self.pos[0] + dx, self.pos[1])
+        self.player_rect.topleft = self.poss
+        if self.player_rect.colliderect(platform_rect):
+            if dx > 0:
 
 if __name__ == "__main__":
     main()
