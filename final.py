@@ -15,9 +15,15 @@ class Player():
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
 
-     def movement(self,dt, platform_rect):
+    def movement(self,dt, platform_rect):
         dx = 0
         dy = 0
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_a]:
+             dx = -self.velocity * dt
+        if keys[pygame.K_d]:
+            dx =  self.velocity * dt
 
 if __name__ == "__main__":
     main()
