@@ -14,6 +14,10 @@ class Player():
     
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
-        
+
+     def movement(self,dt, platform_rect):
+        dx = 0
+        dy = 0
+
 if __name__ == "__main__":
     main()
