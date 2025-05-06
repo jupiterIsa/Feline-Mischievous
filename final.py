@@ -24,6 +24,10 @@ class Player():
              dx = -self.velocity * dt
         if keys[pygame.K_d]:
             dx =  self.velocity * dt
+        if keys[pygame.K_SPACE] and not self.isJumping:
+            self.isJumping = True
+            self.gravity = self.jumpPower
+
 
 if __name__ == "__main__":
     main()
