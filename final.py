@@ -27,6 +27,9 @@ class Player():
         if keys[pygame.K_SPACE] and not self.isJumping:
             self.isJumping = True
             self.gravity = self.jumpPower
+        
+        self.gravity -= self.gravityStrength * dt
+        dy = -self.gravity
 
 
 if __name__ == "__main__":
