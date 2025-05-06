@@ -11,5 +11,9 @@ class Player():
         self.gravityStrength = 10
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
+    
+    def update(self, dt, platform_rect):
+        self.movement(dt, platform_rect)
+        
 if __name__ == "__main__":
     main()
