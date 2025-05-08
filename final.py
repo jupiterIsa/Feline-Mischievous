@@ -95,6 +95,9 @@ def main():
     running = True
     while running:
         dt = clock.tick(60) / 1000.0  
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
 
 if __name__ == "__main__":
