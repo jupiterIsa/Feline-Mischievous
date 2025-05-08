@@ -102,6 +102,16 @@ def main():
         #  Game Logic
         player.update(dt, platform.rect)
 
+        # Render
+        screen.fill((0, 0, 0))
+        player.draw(screen)
+        platform.draw(screen)
+    
+
+        pygame.display.flip()
+
+    pygame.quit()
+
 
 if __name__ == "__main__":
     main()
