@@ -41,6 +41,9 @@ class Player():
             elif dx < 0:
                 self.pos = (platform_rect.right, self.pos[1])
             self.player_rect.topleft = self.pos
+        
+        self.pos = (self.pos[0], self.pos[1] + dy)
+        self.player_rect.topleft = self.pos
 
 if __name__ == "__main__":
     main()
