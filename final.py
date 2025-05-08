@@ -80,6 +80,9 @@ class Platform():
         surf = pygame.Surface((self.size[0],self.size[1]))
         surf.fill(pygame.Color(0, 255, 0))
         return surf
+    
+    def draw(self, surface):
+        surface.blit(self.surface,self.pos)
 
 if __name__ == "__main__":
     main()
