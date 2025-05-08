@@ -84,5 +84,10 @@ class Platform():
     def draw(self, surface):
         surface.blit(self.surface,self.pos)
 
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((800, 600))
+    clock = pygame.time.Clock()
+    
 if __name__ == "__main__":
     main()
