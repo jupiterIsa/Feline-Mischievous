@@ -92,6 +92,10 @@ def main():
     player = Player()
     platform = Platform((000, 500), (800, 20))
 
+    running = True
+    while running:
+        dt = clock.tick(60) / 1000.0  
+
 
 if __name__ == "__main__":
     main()
