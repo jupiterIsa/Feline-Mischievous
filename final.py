@@ -31,10 +31,11 @@ class Player():
         self.gravity -= self.gravityStrength * dt
         dy = -self.gravity
 
+
         self.pos = (self.pos[0] + dx, self.pos[1])
-        self.player_rect.topleft = self.poss
-        if self.player_rect.colliderect(platform_rect):
-            
+        self.player_rect.topleft = self.pos
+        
+        if self.player_rect.colliderect(platform_rect):   
             if dx > 0:
                 self.pos = (platform_rect.left - self.size, self.pos[1])
            
@@ -42,8 +43,17 @@ class Player():
                 self.pos = (platform_rect.right, self.pos[1])
             self.player_rect.topleft = self.pos
         
+
         self.pos = (self.pos[0], self.pos[1] + dy)
         self.player_rect.topleft = self.pos
+        
+        if self.player_rect.colliderect(platform_rect):
+            if dy > 0: 
+                self.pos = (self.pos[0], platform_rect.top - self.size)
+                self.gravity = 0
+                self.isJumping = False
+        
+
 
 if __name__ == "__main__":
     main()
