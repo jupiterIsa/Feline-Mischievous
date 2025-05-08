@@ -58,7 +58,11 @@ class Player():
                 self.gravity = 0
         
         self.player_rect.topleft = self.pos  
-        
+
+    def update_surface(self):
+        surf = pygame.Surface((self.size,self.size))
+        surf.fill(pygame.Color(212, 0, 255))
+        return surf        
 
 
 if __name__ == "__main__":
