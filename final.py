@@ -68,5 +68,13 @@ class Player():
         self.surface.set_alpha(255)
         surface.blit(self.surface,self.pos)
 
+
+class Platform():
+    def __init__(self, pos, size):
+        self.pos = pos
+        self.size = size
+        self.surface = self.update_surface()
+        self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
+
 if __name__ == "__main__":
     main()
