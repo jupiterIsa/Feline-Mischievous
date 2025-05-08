@@ -64,6 +64,9 @@ class Player():
         surf.fill(pygame.Color(212, 0, 255))
         return surf        
 
+    def draw(self, surface):
+        self.surface.set_alpha(255)
+        surface.blit(self.surface,self.pos)
 
 if __name__ == "__main__":
     main()
