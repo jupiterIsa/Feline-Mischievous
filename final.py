@@ -76,5 +76,10 @@ class Platform():
         self.surface = self.update_surface()
         self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
 
+    def update_surface(self):
+        surf = pygame.Surface((self.size[0],self.size[1]))
+        surf.fill(pygame.Color(0, 255, 0))
+        return surf
+
 if __name__ == "__main__":
     main()
