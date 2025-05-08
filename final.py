@@ -52,6 +52,12 @@ class Player():
                 self.pos = (self.pos[0], platform_rect.top - self.size)
                 self.gravity = 0
                 self.isJumping = False
+         
+        elif dy < 0:
+                self.pos = (self.pos[0], platform_rect.bottom)
+                self.gravity = 0
+        
+        self.player_rect.topleft = self.pos  
         
 
 
