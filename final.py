@@ -88,6 +88,10 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     clock = pygame.time.Clock()
-    
+
+    player = Player()
+    platform = Platform((000, 500), (800, 20))
+
+
 if __name__ == "__main__":
     main()
