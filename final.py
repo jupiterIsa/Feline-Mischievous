@@ -44,8 +44,8 @@ class Player():
             self.player_rect.topleft = self.pos
         
 
-            self.pos = (self.pos[0], self.pos[1] + dy)
-            self.player_rect.topleft = self.pos
+        self.pos = (self.pos[0], self.pos[1] + dy)
+        self.player_rect.topleft = self.pos
         
         if self.player_rect.colliderect(platform_rect):
             if dy > 0: 
