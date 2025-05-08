@@ -99,6 +99,9 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        #  Game Logic
+        player.update(dt, platform.rect)
+
 
 if __name__ == "__main__":
     main()
