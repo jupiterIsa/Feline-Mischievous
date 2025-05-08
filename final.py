@@ -44,8 +44,8 @@ class Player():
             self.player_rect.topleft = self.pos
         
 
-        self.pos = (self.pos[0], self.pos[1] + dy)
-        self.player_rect.topleft = self.pos
+            self.pos = (self.pos[0], self.pos[1] + dy)
+            self.player_rect.topleft = self.pos
         
         if self.player_rect.colliderect(platform_rect):
             if dy > 0: 
@@ -53,11 +53,11 @@ class Player():
                 self.gravity = 0
                 self.isJumping = False
          
-        elif dy < 0:
+            elif dy < 0:
                 self.pos = (self.pos[0], platform_rect.bottom)
                 self.gravity = 0
         
-        self.player_rect.topleft = self.pos  
+            self.player_rect.topleft = self.pos  
 
     def update_surface(self):
         surf = pygame.Surface((self.size,self.size))
