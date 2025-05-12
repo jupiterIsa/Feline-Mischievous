@@ -23,13 +23,13 @@ class Player():
         self.timer = 0
 
     
-    def update(self, dt, platform_rect):
-        self.movement(dt, platform_rect)
+    def update(self, dt):
+        self.movement(dt)
         self.attack()
         self.update_player_state(dt)
         self.surface = self.update_surface()
 
-    def movement(self,dt, platform_rect):    
+    def movement(self,dt):    
         dx = 0
         dy = 0
 
@@ -217,9 +217,8 @@ class Game():
             platform.draw(screen)
     
     def update_game(self,dt):
-
-        for platform in self.platforms:
-            self.player.update(dt, platform.rect)
+        self.player.update(dt)
+        self.player.check_collision([platform.rect for platform in self.platforms])
         self.lose_game()
 
     def lose_game(self):
