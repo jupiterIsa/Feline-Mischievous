@@ -116,7 +116,7 @@ class Player():
                     self.player_state = "falling"
             
             elif self.player_state == "falling":
-                if self.y > 0 and self.gravity > -1:
+                if self.gravity > -1:
                     self.player_state = "idle"
 
         if self.last_state != self.player_state:
