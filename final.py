@@ -3,7 +3,8 @@ import pygame
 class Player():
     def __init__(self):
         self.pos = (400, 300)
-        self.size = 15
+        self.size = (32,32)
+        self.frame = pygame.image.load("Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
         self.surface = self.update_surface()
         self.velocity = 400
         self.jumpPower = 10
@@ -15,7 +16,7 @@ class Player():
         self.player_state = "idle"
         self.last_state = "idle"
         self.current_frame = 0
-        self.frame = f"Sprites/Cat/idle/cat_frame_idle_0.png"
+        
         self.timer = 0
 
     
@@ -105,7 +106,7 @@ class Player():
             frame = pygame.image.load(image_path).convert_alpha()
             self.current_frame += 1
             return frame
-            
+        
 
 
 
