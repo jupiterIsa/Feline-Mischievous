@@ -7,7 +7,7 @@ class Player():
         self.frame_size = (self.size,self.size)
         self.frame = pygame.image.load("src/Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
         self.surface = self.update_surface()
-        self.velocity = 400
+        self.velocity = 200
         self.jumpPower = 10
         self.gravity = 0
         self.gravityStrength = 10
@@ -29,9 +29,7 @@ class Player():
         self.update_player_state(dt)
         self.surface = self.update_surface()
 
-    def movement(self,dt, platform_rect):
-
-    
+    def movement(self,dt, platform_rect):    
         dx = 0
         dy = 0
 
@@ -52,14 +50,17 @@ class Player():
         self.x = dx
         self.y = dy
 
+    
+    def check_collision(self, platform_rect):
+        dx = self.x
+        dy = self.y
 
         self.pos = (self.pos[0] + dx, self.pos[1])
         self.player_rect.topleft = self.pos
         
-        if self.player_rect.colliderect(platform_rect):   
+        if self.player_rect.colliderect(platform_rect):
             if dx > 0:
                 self.pos = (platform_rect.left - self.size, self.pos[1])
-           
             elif dx < 0:
                 self.pos = (platform_rect.right, self.pos[1])
             self.player_rect.topleft = self.pos
@@ -78,7 +79,7 @@ class Player():
                 self.pos = (self.pos[0], platform_rect.bottom)
                 self.gravity = 0
         
-            self.player_rect.topleft = self.pos  
+            self.player_rect.topleft = self.pos
 
     def attack(self):
         buttton = pygame.mouse.get_pressed()
