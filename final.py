@@ -77,9 +77,13 @@ class Platform():
         self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
 
     def update_surface(self):
-        surf = pygame.Surface((self.size[0],self.size[1]))
-        surf.fill(pygame.Color(0, 255, 0))
-        return surf
+        if self.image_path:
+            image = pygame.image.load(self.image_path).convert_alpha()
+            return pygame.transform.scale(image, self.size)
+        else:
+            surf = pygame.Surface(self.size)
+            surf.fill(pygame.Color(0, 255, 0))  
+            return surf
     
     def draw(self, surface):
         surface.blit(self.surface,self.pos)
