@@ -83,7 +83,7 @@ class Player():
                 self.player_state = "walking"
             elif keys[pygame.K_SPACE]:
                 self.player_state = "jumping"
-            elif self.y > 3:
+            elif self.y > 1:
                 self.player_state = "falling"
         
         elif self.player_state == "walking":
@@ -91,7 +91,7 @@ class Player():
                 self.player_state = "idle"
             elif keys[pygame.K_SPACE]:
                 self.player_state = "jumping"
-            elif self.y > 3:
+            elif self.y > 1:
                 self.player_state = "falling"
         
         elif self.player_state == "jumping":
