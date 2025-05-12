@@ -9,7 +9,7 @@ class Player():
         self.jumpPower = 10
         self.gravity = 0
         self.gravityStrength = 10
-        self.y = 0
+        self.y, self.x = 0
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
         self.player_state = "idle"
@@ -71,7 +71,9 @@ class Player():
             elif keys[pygame.K_SPACE]:
                 self.player_state = "jumping"
         
-        
+        elif self.player_state == "walking":
+            if self.x == 0 and self.y == 0:
+                self.player_state = "idle"
 
 
     def update_surface(self):
