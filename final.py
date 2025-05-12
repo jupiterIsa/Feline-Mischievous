@@ -86,29 +86,30 @@ class Player():
 
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
-        if self.player_state == "idle":
-            if keys[pygame.K_a] or keys[pygame.K_d]:
-                self.player_state = "walking"
-            elif keys[pygame.K_SPACE]:
-                self.player_state = "jumping"
-            elif self.y > 1:
-                self.player_state = "falling"
-        
-        elif self.player_state == "walking":
-            if self.x == 0:
-                self.player_state = "idle"
-            elif keys[pygame.K_SPACE]:
-                self.player_state = "jumping"
-            elif self.y > 1:
-                self.player_state = "falling"
-        
-        elif self.player_state == "jumping":
-            if self.y > 1:
-                self.player_state = "falling"
-        
-        elif self.player_state == "falling":
-            if self.y > 0 and self.gravity == 0:
-                self.player_state = "idle"
+        if not self.isattacking:
+            if self.player_state == "idle":
+                if keys[pygame.K_a] or keys[pygame.K_d]:
+                    self.player_state = "walking"
+                elif keys[pygame.K_SPACE]:
+                    self.player_state = "jumping"
+                elif self.y > 1:
+                    self.player_state = "falling"
+            
+            elif self.player_state == "walking":
+                if self.x == 0:
+                    self.player_state = "idle"
+                elif keys[pygame.K_SPACE]:
+                    self.player_state = "jumping"
+                elif self.y > 1:
+                    self.player_state = "falling"
+            
+            elif self.player_state == "jumping":
+                if self.y > 1:
+                    self.player_state = "falling"
+            
+            elif self.player_state == "falling":
+                if self.y > 0 and self.gravity == 0:
+                    self.player_state = "idle"
 
 
         if self.last_state != self.player_state:
@@ -124,6 +125,9 @@ class Player():
             self.player_animation(dt, 3, "jumping_", False)
         elif self.player_state == "falling":
             self.player_animation(dt, 3, "falling_", False)
+        elif self.player_state == "attacking":
+            self.player_animation(dt, 4, "attacking_", False)
+        
         
 
         
@@ -146,6 +150,7 @@ class Player():
             if can_loop:
                 self.current_frame = 0
             else:
+                isattacking = False
                 self.current_frame = frame_count - 1
         
 
