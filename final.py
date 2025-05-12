@@ -218,7 +218,7 @@ class Game():
         self.lose_game()
 
     def lose_game(self):
-        if self.player.pos[1] > 600:
+        if self.player.pos[1] > 1000:
             self.player.pos = (400, 300)
             self.score = 0
 
