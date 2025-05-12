@@ -13,6 +13,9 @@ class Player():
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
         self.player_state = "idle"
+        self.last_state = "idle"
+        self.current_frame = 0
+        self.timer = 0
 
     
     def update(self, dt, platform_rect):
@@ -92,7 +95,11 @@ class Player():
             if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
 
-        
+    def player_animation(self, frame_count):
+
+        while self.current_frame < frame_count + 1:
+            self.current_frame += 1
+
 
 
 
