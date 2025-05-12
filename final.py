@@ -126,10 +126,11 @@ class Player():
             
         self.timer += dt
         if self.timer >= .1:
-            image_path = f"{prefix}{self.current_frame}.png"
-            self.frame = pygame.image.load(image_path).convert_alpha()
-            self.current_frame += 1
-            self.timer = 0
+            if self.current_frame < frame_count:
+                image_path = f"{prefix}{self.current_frame}.png"
+                self.frame = pygame.image.load(image_path).convert_alpha()
+                self.current_frame += 1
+                self.timer = 0
             
         if can_loop and self.current_frame == frame_count:
             self.current_frame = 0
