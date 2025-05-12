@@ -113,7 +113,7 @@ class Player():
                 self.last_state = self.player_state
             
             self.timer += dt
-            if self.timer >= 2:
+            if self.timer >= .3:
                 image_path = f"{prefix}{self.current_frame}.png"
                 self.frame = pygame.image.load(image_path).convert_alpha()
                 self.current_frame += 1
