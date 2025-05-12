@@ -25,6 +25,7 @@ class Player():
     
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
+        self.attack()
         self.update_player_state(dt)
         self.surface = self.update_surface()
 
@@ -80,13 +81,15 @@ class Player():
             self.player_rect.topleft = self.pos  
 
     def attack(self):
-        if self.player_state == "idle" or self.player_state == "walking":
-            self.player_state = "attacking"
-            self.isattacking = True
+        buttton = pygame.mouse.get_pressed()
+        if buttton[0]:
+            if self.player_state == "idle" or self.player_state == "walking":
+                self.player_state = "attacking"
+                self.isattacking = True
 
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
-        if not self.isattacking:
+        if self.isattacking == False:
             if self.player_state == "idle":
                 if keys[pygame.K_a] or keys[pygame.K_d]:
                     self.player_state = "walking"
