@@ -17,6 +17,7 @@ class Player():
 
         self.player_state = "idle"
         self.last_state = "idle"
+        self.facing_left = False
         self.current_frame = 0
         self.timer = 0
 
@@ -33,8 +34,10 @@ class Player():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
              dx = -self.velocity * dt
+             self.facing_left = True
         if keys[pygame.K_d]:
             dx =  self.velocity * dt
+            self.facing_left = False
         if keys[pygame.K_SPACE] and not self.isJumping:
             self.isJumping = True
             self.gravity = self.jumpPower
