@@ -172,10 +172,10 @@ class Player():
 
 
 class Platform():
-    def __init__(self, pos, size, image_path):
+    def __init__(self, pos, size):
         self.pos = pos
         self.size = size
-        self.image_path = image_path
+        self.image_path = "Sprites/Platform/platform1.png"
         self.surface = self.update_surface()
         self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
 
@@ -194,7 +194,7 @@ class Platform():
 class Game():
     def __init__(self):
         self.player = Player()
-        self.platform = Platform((30, 500), (400, 80), "Sprites/Platform/platform1.png")
+        self.platform = Platform((30, 500), (400, 80))
         self.timer = 10
         self.score = 0
     
