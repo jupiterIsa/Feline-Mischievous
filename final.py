@@ -80,7 +80,13 @@ class Player():
                 self.player_state = "jumping"
             elif self.y < 0:
                 self.player_state = "falling"
-                
+        
+        elif self.player_state == "jumping":
+            if self.y > 0:
+                self.player_state = "falling"
+        
+        
+
 
 
     def update_surface(self):
