@@ -33,7 +33,9 @@ class Player():
         
         self.gravity -= self.gravityStrength * dt
         dy = -self.gravity
-        y = dy
+
+        self.x = dx
+        self.y = dy
 
 
         self.pos = (self.pos[0] + dx, self.pos[1])
@@ -74,6 +76,11 @@ class Player():
         elif self.player_state == "walking":
             if self.x == 0 and self.y == 0:
                 self.player_state = "idle"
+            elif self.y > 0:
+                self.player_state = "jumping"
+            elif self.y < 0:
+                self.player_state = "falling"
+                
 
 
     def update_surface(self):
