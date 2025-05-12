@@ -29,6 +29,8 @@ class Player():
         self.surface = self.update_surface()
 
     def movement(self,dt, platform_rect):
+
+    
         dx = 0
         dy = 0
 
@@ -76,6 +78,11 @@ class Player():
                 self.gravity = 0
         
             self.player_rect.topleft = self.pos  
+
+    def attack(self):
+        if self.player_state == "idle" or self.player_state == "walking":
+            self.player_state = "attacking"
+            self.isattacking = True
 
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
