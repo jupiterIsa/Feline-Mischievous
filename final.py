@@ -9,8 +9,11 @@ class Player():
         self.jumpPower = 10
         self.gravity = 0
         self.gravityStrength = 10
+        self.y = 0
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
+        self.player_state = "idle"
+
     
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
@@ -30,6 +33,7 @@ class Player():
         
         self.gravity -= self.gravityStrength * dt
         dy = -self.gravity
+        y = dy
 
 
         self.pos = (self.pos[0] + dx, self.pos[1])
@@ -59,6 +63,17 @@ class Player():
         
             self.player_rect.topleft = self.pos  
 
+    def update_player_state(self):
+        if self.player_state == "idle":
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_a] or keys[pygame.K_d]:
+                self.player_state = "walking"
+            elif keys[pygame.K_SPACE]:
+                self.player_state = "jumping"
+        
+        
+
+
     def update_surface(self):
         surf = pygame.Surface((self.size,self.size))
         surf.fill(pygame.Color(212, 0, 255))
@@ -67,6 +82,7 @@ class Player():
     def draw(self, surface):
         self.surface.set_alpha(255)
         surface.blit(self.surface,self.pos)
+    
 
 
 class Platform():
@@ -92,7 +108,7 @@ class Platform():
 class Game():
     def __init__(self):
         self.player = Player()
-        self.platform = Platform((000, 500), (500, 80), "Sprites/Platform/platform1.png")
+        self.platform = Platform((000, 500), (400, 80), "Sprites/Platform/platform1.png")
         self.timer = 10
         self.score = 0
     
