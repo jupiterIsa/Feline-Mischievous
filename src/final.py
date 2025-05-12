@@ -5,7 +5,7 @@ class Player():
         self.pos = (800, 300)
         self.size = 64
         self.frame_size = (self.size,self.size)
-        self.frame = pygame.image.load("Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
+        self.frame = pygame.image.load("src/Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
         self.surface = self.update_surface()
         self.velocity = 400
         self.jumpPower = 10
@@ -134,7 +134,7 @@ class Player():
 
     def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
-        prefix = f"Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
+        prefix = f"src/Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
             
         self.timer += dt
         if self.timer >= .080:
@@ -190,7 +190,7 @@ class Platform():
         surface.blit(self.surface,self.pos)
 
     def platform_type(self):
-            return f"Sprites/Platform/platform{self.type}.png"
+            return f"src/Sprites/Platform/platform{self.type}.png"
         
 
 class Game():
@@ -238,7 +238,7 @@ def main():
     screen = pygame.display.set_mode((screen_width, screen_height - 100), pygame.RESIZABLE)
     clock = pygame.time.Clock()
 
-    background_image = pygame.image.load("Sprites/Background/Background.png").convert()
+    background_image = pygame.image.load("src/Sprites/Background/Background.png").convert()
     background = pygame.transform.scale(background_image, (screen_width, screen_height))
 
     game = Game()
