@@ -3,7 +3,8 @@ import pygame
 class Player():
     def __init__(self):
         self.pos = (400, 300)
-        self.size = (32,32)
+        self.size = 64
+        self.frame_size = (self.size,self.size)
         self.frame = pygame.image.load("Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
         self.surface = self.update_surface()
         self.velocity = 400
@@ -12,7 +13,7 @@ class Player():
         self.gravityStrength = 10
         self.y, self.x = (0,0)
         self.isJumping = False
-        self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
+        self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.frame_size[0], self.frame_size[1])
         self.player_state = "idle"
         self.last_state = "idle"
         self.current_frame = 0
@@ -112,7 +113,7 @@ class Player():
 
 
     def update_surface(self):
-        return pygame.transform.scale(self.frame, self.size)   
+        return pygame.transform.scale(self.frame, self.frame_size)   
 
     def draw(self, surface):
         self.surface.set_alpha(255)
