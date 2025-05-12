@@ -123,24 +123,18 @@ class Player():
     def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
         prefix = f"Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
-
-        while self.current_frame < frame_count:
-            if self.last_state != self.player_state:
-                self.current_frame = 0
-                self.last_state = self.player_state
-                print (f"State changed to {self.player_state}")
             
-            self.timer += dt
-            if self.timer >= .1:
-                image_path = f"{prefix}{self.current_frame}.png"
-                self.frame = pygame.image.load(image_path).convert_alpha()
-                self.current_frame += 1
-                self.timer = 0
+        self.timer += dt
+        if self.timer >= .1:
+            image_path = f"{prefix}{self.current_frame}.png"
+            self.frame = pygame.image.load(image_path).convert_alpha()
+            self.current_frame += 1
+            self.timer = 0
             
-            if can_loop and self.current_frame == frame_count:
-                self.current_frame = 0
-            else:
-                break
+        if can_loop and self.current_frame == frame_count:
+            self.current_frame = 0
+        else:
+            self.current_frame = frame_count - 1
         
 
 
