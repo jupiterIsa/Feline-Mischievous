@@ -89,8 +89,14 @@ def main():
 
     info = pygame.display.Info()
 
-    screen = pygame.display.set_mode((info.current_w - 100, info.current_h - 100), pygame.RESIZABLE)
+    screen_width = info.current_w - 100
+    screen_height = info.current_h - 100
+
+    screen = pygame.display.set_mode((screen_width, screen_height - 100), pygame.RESIZABLE)
     clock = pygame.time.Clock()
+
+    background_image = pygame.image.load("Sprites/Background/Background.png").convert()
+    background = pygame.transform.scale(background_image, (screen_width, screen_height))
 
     player = Player()
     platform = Platform((000, 500), (800, 20))
@@ -102,11 +108,17 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+            if event.type == pygame.VIDEORESIZE:
+                screen_width, screen_height = event.w, event.h
+                background = pygame.transform.scale(background_image, (screen_width, screen_height))
+        
+
         #  Game Logic
         player.update(dt, platform.rect)
 
         # Render
         screen.fill((0, 0, 0))
+        screen.blit(background, (0, 0))
         player.draw(screen)
         platform.draw(screen)
     
