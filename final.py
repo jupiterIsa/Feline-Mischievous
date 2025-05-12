@@ -215,6 +215,12 @@ class Game():
     
     def update_game(self,dt):
         self.player.update(dt,self.platform.rect)
+        self.lose_game()
+
+    def lose_game(self):
+        if self.player.pos[1] > 600:
+            self.player.pos = (400, 300)
+            self.score = 0
 
 def main():
     pygame.init()
