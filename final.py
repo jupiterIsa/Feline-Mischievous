@@ -14,16 +14,16 @@ class Player():
         self.y, self.x = (0,0)
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.frame_size[0], self.frame_size[1])
+
         self.player_state = "idle"
         self.last_state = "idle"
         self.current_frame = 0
-        
         self.timer = 0
 
     
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
-        self.update_player_state()
+        self.update_player_state(dt)
 
     def movement(self,dt, platform_rect):
         dx = 0
@@ -72,9 +72,11 @@ class Player():
         
             self.player_rect.topleft = self.pos  
 
-    def update_player_state(self):
+    def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
         if self.player_state == "idle":
+            self.player_animation(dt, 1, "idle_", True)
+
             if keys[pygame.K_a] or keys[pygame.K_d]:
                 self.player_state = "walking"
             elif keys[pygame.K_SPACE]:
@@ -83,6 +85,7 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "walking":
+            self.player_animation(dt, 4, "walking_", True)
             if self.x == 0:
                 self.player_state = "idle"
             elif keys[pygame.K_SPACE]:
@@ -91,22 +94,35 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "jumping":
+            self.player_animation(dt, 3, "jumping_", False)
             if self.y > 1:
                 self.player_state = "falling"
         
         elif self.player_state == "falling":
+            self.player_animation(dt, 3, "falling_", False)
             if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
 
-    def player_animation(self, frame_count, frame_prefix):
+    def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
         prefix = f"Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
 
-        while self.current_frame < frame_count + 1:
-            image_path = f"{prefix}{self.current_frame}.png"
-            frame = pygame.image.load(image_path).convert_alpha()
-            self.current_frame += 1
-            return frame
+        while self.current_frame < frame_count:
+            if self.last_state != self.player_state:
+                self.current_frame = 0
+                self.last_state = self.player_state
+            
+            self.timer += dt
+            if self.timer >= 2:
+                image_path = f"{prefix}{self.current_frame}.png"
+                self.frame = pygame.image.load(image_path).convert_alpha()
+                self.current_frame += 1
+                self.timer = 0
+            
+            if can_loop and self.current_frame == frame_count:
+                self.current_frame = 0
+            else:
+                break
         
 
 
