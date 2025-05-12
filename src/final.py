@@ -238,7 +238,7 @@ class Game():
         (730, 100, 2), 
 
         (1700, 700, 2), 
-        (1850, 600, 2), 
+        
         ]
 
         self.platforms = []
@@ -264,6 +264,7 @@ class Game():
     def update_game(self,dt):
         self.player.update(dt)
         self.player.check_collision([platform.rect for platform in self.platforms])
+        self.spawn_item()
         self.lose_game()
 
     def lose_game(self):
@@ -278,11 +279,11 @@ class Game():
             newpos = self.random_position()
             self.item.pos = (newpos[0], newpos[1])
             self.item.rect.topleft = self.item.pos
-            print(self.score)
+            print(f"Score: {self.score} | Position: {self.item.pos}")
 
     def random_position(self):
         pos = self.platforms[random.randrange(0,len(self.platforms))].pos
-        return (pos[0], pos[1] - 50)
+        return (pos[0] + 30, pos[1] - 45)
     
 def main():
     pygame.init()
