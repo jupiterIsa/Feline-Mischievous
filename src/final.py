@@ -201,36 +201,49 @@ class Platform():
     def platform_type(self):
             return f"src/Sprites/Platform/platform{self.type}.png"
         
+class Item():
+    def __init__(self, pos):
+        self.pos = pos
+        self.size = (50, 50)
+        self.image_path = "src/Sprites/Item/Money.png"
+        self.surface = self.update_surface()
+        self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
+
+    def update_surface(self):
+        image = pygame.image.load(self.image_path).convert_alpha()
+        return pygame.transform.scale(image, self.size)
+    
+    def draw(self, surface):
+        surface.blit(self.surface,self.pos)
+
 
 class Game():
     def __init__(self):
         self.player = Player()
 
         self.platform_attributes = [
-    
-    (50, 560, 3), 
-    (400, 730, 2),
-    (1150, 680, 1), 
+        (50, 560, 3), 
+        (400, 730, 2),
+        (1150, 680, 1), 
 
-    
-    (300, 300, 3), 
-    (800, 520, 3),
+        (300, 300, 3), 
+        (800, 520, 3),
 
-    (650, 350, 2), 
-    (900, 800, 2), 
-    (650,700,2),     
-    (1050, 350, 2),    
-    (1400, 450, 2),       
-   
-    (1250, 180, 3), 
-    (1600, 250, 2), 
+        (650, 350, 2), 
+        (900, 800, 2), 
+        (650,700,2),     
+        (1050, 350, 2),    
+        (1400, 450, 2),       
     
-    
-    (100, 120, 2), 
-    (730, 100, 2), 
+        (1250, 180, 3), 
+        (1600, 250, 2), 
+        
+        
+        (100, 120, 2), 
+        (730, 100, 2), 
 
-    (1700, 700, 2), 
-    (1850, 600, 2), 
+        (1700, 700, 2), 
+        (1850, 600, 2), 
         ]
 
         self.platforms = []
