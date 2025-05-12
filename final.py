@@ -86,7 +86,10 @@ class Platform():
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
+
+    info = pygame.display.Info()
+
+    screen = pygame.display.set_mode((info.current_w - 100, info.current_h - 100), pygame.RESIZABLE)
     clock = pygame.time.Clock()
 
     player = Player()
