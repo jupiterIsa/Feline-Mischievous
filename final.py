@@ -129,6 +129,8 @@ class Player():
             if self.current_frame < frame_count:
                 image_path = f"{prefix}{self.current_frame}.png"
                 self.frame = pygame.image.load(image_path).convert_alpha()
+                if not self.facing_left:
+                    self.frame = pygame.transform.flip(self.frame, True, False)
                 self.current_frame += 1
                 self.timer = 0
         
