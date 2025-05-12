@@ -249,7 +249,8 @@ class Game():
         self.timer = 10
         self.score = 0
 
-        self.item = Item((self.random_position()[0], self.random_position()[1]))
+        self.posNewPos = self.random_position()
+        self.item = Item((self.posNewPos[0], self.posNewPos[1]))
 
         print(self.item.pos)
     
@@ -274,12 +275,14 @@ class Game():
     def spawn_item(self):
         if self.player.player_rect.colliderect(self.item.rect) and self.player.isattacking:
             self.score += 1
-            self.item.pos = (self.random_position()[0], self.random_position()[1])
+            newpos = self.random_position()
+            self.item.pos = (newpos[0], newpos[1])
             self.item.rect.topleft = self.item.pos
+            print(self.score)
 
     def random_position(self):
         pos = self.platforms[random.randrange(0,len(self.platforms))].pos
-        return (pos[0], pos[1] +5)
+        return (pos[0], pos[1] - 50)
     
 def main():
     pygame.init()
