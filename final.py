@@ -9,7 +9,7 @@ class Player():
         self.jumpPower = 10
         self.gravity = 0
         self.gravityStrength = 10
-        self.y, self.x = 0
+        self.y, self.x = (0,0)
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.size, self.size)
         self.player_state = "idle"
@@ -67,30 +67,32 @@ class Player():
             self.player_rect.topleft = self.pos  
 
     def update_player_state(self):
+        keys = pygame.key.get_pressed()
         if self.player_state == "idle":
-            keys = pygame.key.get_pressed()
             if keys[pygame.K_a] or keys[pygame.K_d]:
                 self.player_state = "walking"
             elif keys[pygame.K_SPACE]:
                 self.player_state = "jumping"
+            elif self.y > 3:
+                self.player_state = "falling"
         
         elif self.player_state == "walking":
-            if self.x == 0 and self.y == 0:
+            if self.x == 0:
                 self.player_state = "idle"
-            elif self.y > 0:
+            elif keys[pygame.K_SPACE]:
                 self.player_state = "jumping"
-            elif self.y < 0:
+            elif self.y > 3:
                 self.player_state = "falling"
         
         elif self.player_state == "jumping":
-            if self.y > 0:
+            if self.y > 1:
                 self.player_state = "falling"
         
         elif self.player_state == "falling":
-            if self.y == 0:
+            if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
-    
 
+        
 
 
 
