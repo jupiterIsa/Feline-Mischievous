@@ -76,7 +76,7 @@ class Player():
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
         if self.player_state == "idle":
-            self.player_animation(dt, 1, "idle_", True)
+            
 
             if keys[pygame.K_a] or keys[pygame.K_d]:
                 self.player_state = "walking"
@@ -86,7 +86,7 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "walking":
-            self.player_animation(dt, 4, "walking_", True)
+            
             if self.x == 0:
                 self.player_state = "idle"
             elif keys[pygame.K_SPACE]:
@@ -95,14 +95,27 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "jumping":
-            self.player_animation(dt, 3, "jumping_", False)
+            
             if self.y > 1:
+                print (f"Jumping {self.y}")
                 self.player_state = "falling"
         
         elif self.player_state == "falling":
-            self.player_animation(dt, 3, "falling_", False)
             if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
+    
+    
+        if self.player_state == "idle":
+            self.player_animation(dt, 1, "idle_", True)
+        elif self.player_state == "walking":
+            self.player_animation(dt, 4, "walking_", True)
+        elif self.player_state == "jumping":
+            self.player_animation(dt, 3, "jumping_", False)
+        elif self.player_state == "falling":
+            self.player_animation(dt, 3, "falling_", False)
+        
+
+        
 
     def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
@@ -112,9 +125,10 @@ class Player():
             if self.last_state != self.player_state:
                 self.current_frame = 0
                 self.last_state = self.player_state
+                print (f"State changed to {self.player_state}")
             
             self.timer += dt
-            if self.timer >= .3:
+            if self.timer >= .1:
                 image_path = f"{prefix}{self.current_frame}.png"
                 self.frame = pygame.image.load(image_path).convert_alpha()
                 self.current_frame += 1
