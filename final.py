@@ -89,7 +89,7 @@ class Player():
 
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
-        if self.isattacking == False:
+        if not self.isattacking:
             if self.player_state == "idle":
                 if keys[pygame.K_a] or keys[pygame.K_d]:
                     self.player_state = "walking"
@@ -153,7 +153,9 @@ class Player():
             if can_loop:
                 self.current_frame = 0
             else:
-                isattacking = False
+                if self.player_state == "attacking":
+                    self.player_state = "idle"
+                    self.isattacking = False
                 self.current_frame = frame_count - 1
         
 
