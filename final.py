@@ -84,6 +84,18 @@ class Platform():
     def draw(self, surface):
         surface.blit(self.surface,self.pos)
 
+class Game():
+    def __init__(self):
+        self.player = Player()
+        self.platform = Platform((000, 500), (800, 20))
+    
+    def draw_game(self,screen):
+        self.player.draw(screen)
+        self.platform.draw(screen)
+    
+    def update_game(self,dt):
+        self.player.update(dt,self.platform.rect)
+
 def main():
     pygame.init()
 
@@ -98,8 +110,7 @@ def main():
     background_image = pygame.image.load("Sprites/Background/Background.png").convert()
     background = pygame.transform.scale(background_image, (screen_width, screen_height))
 
-    player = Player()
-    platform = Platform((000, 500), (800, 20))
+    game = Game()
 
     running = True
     while running:
@@ -114,14 +125,12 @@ def main():
         
 
         #  Game Logic
-        player.update(dt, platform.rect)
+        game.update_game(dt)
 
         # Render
         screen.fill((0, 0, 0))
         screen.blit(background, (0, 0))
-        player.draw(screen)
-        platform.draw(screen)
-    
+        game.draw_game(screen)
 
         pygame.display.flip()
 
