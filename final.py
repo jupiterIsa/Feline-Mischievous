@@ -130,7 +130,7 @@ class Platform():
 class Game():
     def __init__(self):
         self.player = Player()
-        self.platform = Platform((000, 500), (400, 80), "Sprites/Platform/platform1.png")
+        self.platform = Platform((30, 500), (400, 80), "Sprites/Platform/platform1.png")
         self.timer = 10
         self.score = 0
     
