@@ -257,7 +257,7 @@ class Game():
     def draw_game(self,screen):
         self.player.draw(screen)
         self.item.draw(screen)
-        self.show_text(screen, f"Score: {self.score} Time: {self.timer}", (10, 10))
+        self.show_text(screen, f"Score: {self.score} Time: {round(self.timer)}", (10, 10))
         for i,platform in enumerate(self.platforms):
             platform.draw(screen, i)
             
