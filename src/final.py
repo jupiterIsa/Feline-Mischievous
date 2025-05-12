@@ -189,8 +189,14 @@ class Platform():
             surf.fill(pygame.Color(0, 255, 0))  
             return surf
     
-    def draw(self, surface):
+    def draw(self, surface, index = None):
         surface.blit(self.surface,self.pos)
+        label = f"T{self.type}"
+        if index is not None:
+            label = f"T{self.type} {index}"
+        text = pygame.font.Font(None, 24).render(label, True, (255, 255, 255))
+        text_rect = text.get_rect(center=(self.pos[0] + self.size[0] // 2, self.pos[1] + self.size[1] // 2))
+        surface.blit(text, text_rect)
 
     def platform_type(self):
             return f"src/Sprites/Platform/platform{self.type}.png"
@@ -201,10 +207,30 @@ class Game():
         self.player = Player()
 
         self.platform_attributes = [
-            (750, 450, 1),
-            (300, 300, 3),
-            (1400,300,3),
-            (750, 600, 2),
+    
+    (50, 560, 3), 
+    (400, 730, 2),
+    (1150, 680, 1), 
+
+    
+    (300, 300, 3), 
+    (800, 520, 3),
+
+    (650, 350, 2), 
+    (900, 800, 2), 
+    (650,700,2),     
+    (1050, 350, 2),    
+    (1400, 450, 2),       
+   
+    (1250, 180, 3), 
+    (1600, 250, 2), 
+    
+    
+    (100, 120, 2), 
+    (730, 100, 2), 
+
+    (1700, 700, 2), 
+    (1850, 600, 2), 
         ]
 
         self.platforms = []
@@ -214,11 +240,13 @@ class Game():
 
         self.timer = 10
         self.score = 0
+       
     
     def draw_game(self,screen):
         self.player.draw(screen)
-        for platform in self.platforms:
-            platform.draw(screen)
+        for i,platform in enumerate(self.platforms):
+            platform.draw(screen, i)
+            
     
     def update_game(self,dt):
         self.player.update(dt)
@@ -239,7 +267,7 @@ def main():
     screen_width = info.current_w - 100
     screen_height = info.current_h - 100
 
-    screen = pygame.display.set_mode((screen_width, screen_height - 100), pygame.RESIZABLE)
+    screen = pygame.display.set_mode((screen_width, screen_height - 100))
     clock = pygame.time.Clock()
 
     background_image = pygame.image.load("src/Sprites/Background/Background.png").convert()
