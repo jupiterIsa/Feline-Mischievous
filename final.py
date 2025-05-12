@@ -76,8 +76,6 @@ class Player():
     def update_player_state(self,dt):
         keys = pygame.key.get_pressed()
         if self.player_state == "idle":
-            
-
             if keys[pygame.K_a] or keys[pygame.K_d]:
                 self.player_state = "walking"
             elif keys[pygame.K_SPACE]:
@@ -86,7 +84,6 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "walking":
-            
             if self.x == 0:
                 self.player_state = "idle"
             elif keys[pygame.K_SPACE]:
@@ -95,7 +92,6 @@ class Player():
                 self.player_state = "falling"
         
         elif self.player_state == "jumping":
-            
             if self.y > 1:
                 print (f"Jumping {self.y}")
                 self.player_state = "falling"
@@ -103,8 +99,15 @@ class Player():
         elif self.player_state == "falling":
             if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
+
+
+        if self.last_state != self.player_state:
+            self.current_frame = 0
+            self.timer = 0
+            self.last_state = self.player_state
+            
     
-    
+
         if self.player_state == "idle":
             self.player_animation(dt, 1, "idle_", True)
         elif self.player_state == "walking":
