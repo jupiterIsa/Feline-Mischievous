@@ -19,6 +19,7 @@ class Player():
         self.last_state = "idle"
         self.facing_left = False
         self.current_frame = 0
+        self.isattacking = False
         self.timer = 0
 
     
