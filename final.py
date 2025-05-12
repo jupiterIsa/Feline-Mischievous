@@ -24,6 +24,7 @@ class Player():
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
         self.update_player_state(dt)
+        self.surface = self.update_surface()
 
     def movement(self,dt, platform_rect):
         dx = 0
