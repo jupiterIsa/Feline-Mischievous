@@ -1,4 +1,5 @@
 import pygame
+import random
 
 class Player():
     def __init__(self):
@@ -191,12 +192,6 @@ class Platform():
     
     def draw(self, surface, index = None):
         surface.blit(self.surface,self.pos)
-        label = f"T{self.type}"
-        if index is not None:
-            label = f"T{self.type} {index}"
-        text = pygame.font.Font(None, 24).render(label, True, (255, 255, 255))
-        text_rect = text.get_rect(center=(self.pos[0] + self.size[0] // 2, self.pos[1] + self.size[1] // 2))
-        surface.blit(text, text_rect)
 
     def platform_type(self):
             return f"src/Sprites/Platform/platform{self.type}.png"
@@ -253,10 +248,14 @@ class Game():
 
         self.timer = 10
         self.score = 0
-       
+
+        self.item = Item((self.random_position()[0], self.random_position()[1]))
+
+        print(self.item.pos)
     
     def draw_game(self,screen):
         self.player.draw(screen)
+        self.item.draw(screen)
         for i,platform in enumerate(self.platforms):
             platform.draw(screen, i)
             
@@ -272,6 +271,16 @@ class Game():
             self.timer = 10
             self.score = 0
 
+    def spawn_item(self):
+        if self.player.player_rect.colliderect(self.item.rect) and self.player.isattacking:
+            self.score += 1
+            self.item.pos = (self.random_position()[0], self.random_position()[1])
+            self.item.rect.topleft = self.item.pos
+
+    def random_position(self):
+        pos = self.platforms[random.randrange(0,len(self.platforms))].pos
+        return (pos[0], pos[1] +5)
+    
 def main():
     pygame.init()
 
