@@ -10,7 +10,7 @@ class Player():
         self.velocity = 350
         self.jumpPower = 10
         self.gravity = 0
-        self.gravityStrength = 10
+        self.gravityStrength = 14
         self.y, self.x = (0,0)
         self.isJumping = False
         self.player_rect = pygame.Rect(self.pos[0], self.pos[1], self.frame_size[0], self.frame_size[1])
@@ -201,8 +201,10 @@ class Game():
         self.player = Player()
 
         self.platform_attributes = [
-            (600, 450, 1),
-            (100, 300, 2),
+            (750, 450, 1),
+            (300, 300, 3),
+            (1400,300,3),
+            (750, 600, 2),
         ]
 
         self.platforms = []
