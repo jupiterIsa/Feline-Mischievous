@@ -15,6 +15,7 @@ class Player():
         self.player_state = "idle"
         self.last_state = "idle"
         self.current_frame = 0
+        self.frame = f"Sprites/Cat/idle/cat_frame_idle_0.png"
         self.timer = 0
 
     
@@ -95,18 +96,22 @@ class Player():
             if self.y > 0 and self.gravity == 0:
                 self.player_state = "idle"
 
-    def player_animation(self, frame_count):
+    def player_animation(self, frame_count, frame_prefix):
+
+        prefix = f"Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
 
         while self.current_frame < frame_count + 1:
+            image_path = f"{prefix}{self.current_frame}.png"
+            frame = pygame.image.load(image_path).convert_alpha()
             self.current_frame += 1
+            return frame
+            
 
 
 
 
     def update_surface(self):
-        surf = pygame.Surface((self.size,self.size))
-        surf.fill(pygame.Color(212, 0, 255))
-        return surf        
+        return pygame.transform.scale(self.frame, self.size)   
 
     def draw(self, surface):
         self.surface.set_alpha(255)
