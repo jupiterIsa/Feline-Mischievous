@@ -93,7 +93,6 @@ class Player():
         
         elif self.player_state == "jumping":
             if self.y > 1:
-                print (f"Jumping {self.y}")
                 self.player_state = "falling"
         
         elif self.player_state == "falling":
@@ -106,8 +105,6 @@ class Player():
             self.timer = 0
             self.last_state = self.player_state
             
-    
-
         if self.player_state == "idle":
             self.player_animation(dt, 1, "idle_", True)
         elif self.player_state == "walking":
@@ -125,17 +122,18 @@ class Player():
         prefix = f"Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
             
         self.timer += dt
-        if self.timer >= .1:
+        if self.timer >= .080:
             if self.current_frame < frame_count:
                 image_path = f"{prefix}{self.current_frame}.png"
                 self.frame = pygame.image.load(image_path).convert_alpha()
                 self.current_frame += 1
                 self.timer = 0
-            
-        if can_loop and self.current_frame == frame_count:
-            self.current_frame = 0
-        else:
-            self.current_frame = frame_count - 1
+        
+        if self.current_frame >= frame_count:
+            if can_loop:
+                self.current_frame = 0
+            else:
+                self.current_frame = frame_count - 1
         
 
 
