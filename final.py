@@ -172,9 +172,9 @@ class Player():
 
 
 class Platform():
-    def __init__(self, pos, size,type):
+    def __init__(self, pos,type):
         self.pos = pos
-        self.size = size
+        self.size = 0
         self.type = type
         self.image_path = self.platform_type()
         self.surface = self.update_surface()
@@ -186,9 +186,9 @@ class Platform():
             if self.type == 1:
                 self.size = (400, 80)
             elif self.type == 2:
-                self.size = (200, 80)
-            elif self.type == 3:
                 self.size = (100, 80)
+            elif self.type == 3:
+                self.size = (200, 80)
             return pygame.transform.scale(image, self.size)
         else:
             surf = pygame.Surface(self.size)
@@ -199,14 +199,13 @@ class Platform():
         surface.blit(self.surface,self.pos)
 
     def platform_type(self):
-        if self.image_path:
             return f"Sprites/Platform/platform{self.type}.png"
         
 
 class Game():
     def __init__(self):
         self.player = Player()
-        self.platform = Platform((30, 500), (400, 80))
+        self.platform = Platform((30, 500), 3)
         self.timer = 10
         self.score = 0
     
