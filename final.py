@@ -2,7 +2,7 @@ import pygame
 
 class Player():
     def __init__(self):
-        self.pos = (400, 300)
+        self.pos = (800, 300)
         self.size = 64
         self.frame_size = (self.size,self.size)
         self.frame = pygame.image.load("Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
@@ -131,9 +131,6 @@ class Player():
         elif self.player_state == "attacking":
             self.player_animation(dt, 4, "attacking_", False)
         
-        
-
-        
 
     def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
@@ -157,10 +154,6 @@ class Player():
                     self.player_state = "idle"
                     self.isattacking = False
                 self.current_frame = frame_count - 1
-        
-
-
-
 
     def update_surface(self):
         return pygame.transform.scale(self.frame, self.frame_size)   
@@ -169,8 +162,6 @@ class Player():
         self.surface.set_alpha(255)
         surface.blit(self.surface,self.pos)
     
-
-
 class Platform():
     def __init__(self, pos,type):
         self.pos = pos
@@ -178,7 +169,7 @@ class Platform():
         self.type = type
         self.image_path = self.platform_type()
         self.surface = self.update_surface()
-        self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
+        self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1] - 15)
 
     def update_surface(self):
         if self.image_path:
@@ -205,7 +196,17 @@ class Platform():
 class Game():
     def __init__(self):
         self.player = Player()
-        self.platform = Platform((30, 500), 3)
+
+        self.platform_attributes = [
+            (600, 450, 1),
+            (100, 300, 2),
+        ]
+
+        self.platforms = []
+        for x,y, type in self.platform_attributes:
+            platform = Platform((x,y),type)
+            self.platforms.append(platform)
+
         self.timer = 10
         self.score = 0
     
@@ -219,7 +220,8 @@ class Game():
 
     def lose_game(self):
         if self.player.pos[1] > 1000:
-            self.player.pos = (400, 300)
+            self.player.pos = (800, 300)
+            self.timer = 10
             self.score = 0
 
 def main():
