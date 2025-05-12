@@ -7,7 +7,7 @@ class Player():
         self.frame_size = (self.size,self.size)
         self.frame = pygame.image.load("src/Sprites/Cat/idle/cat_frame_idle_0.png").convert_alpha()
         self.surface = self.update_surface()
-        self.velocity = 200
+        self.velocity = 350
         self.jumpPower = 10
         self.gravity = 0
         self.gravityStrength = 10
@@ -115,9 +115,8 @@ class Player():
                     self.player_state = "falling"
             
             elif self.player_state == "falling":
-                if self.y > 0 and self.gravity == 0:
+                if self.y > 0 and self.gravity > -1:
                     self.player_state = "idle"
-
 
         if self.last_state != self.player_state:
             self.current_frame = 0
@@ -135,7 +134,7 @@ class Player():
         elif self.player_state == "attacking":
             self.player_animation(dt, 4, "attacking_", False)
         
-
+        
     def player_animation(self,dt, frame_count, frame_prefix, can_loop = False):
 
         prefix = f"src/Sprites/Cat/{self.player_state}/cat_frame_{frame_prefix}"
