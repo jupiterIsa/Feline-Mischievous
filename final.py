@@ -17,6 +17,7 @@ class Player():
     
     def update(self, dt, platform_rect):
         self.movement(dt, platform_rect)
+        self.update_player_state()
 
     def movement(self,dt, platform_rect):
         dx = 0
@@ -85,7 +86,11 @@ class Player():
             if self.y > 0:
                 self.player_state = "falling"
         
-        
+        elif self.player_state == "falling":
+            if self.y == 0:
+                self.player_state = "idle"
+    
+
 
 
 
