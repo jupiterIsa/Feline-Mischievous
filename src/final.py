@@ -257,6 +257,7 @@ class Game():
     def draw_game(self,screen):
         self.player.draw(screen)
         self.item.draw(screen)
+        self.show_text(screen, f"Score: {self.score} Time: {self.timer}", (10, 10))
         for i,platform in enumerate(self.platforms):
             platform.draw(screen, i)
             
@@ -266,9 +267,10 @@ class Game():
         self.player.check_collision([platform.rect for platform in self.platforms])
         self.spawn_item()
         self.lose_game()
+        self.timer -= dt
 
     def lose_game(self):
-        if self.player.pos[1] > 1000:
+        if self.player.pos[1] > 1000 or self.timer <= 0:
             self.player.pos = (800, 300)
             self.timer = 10
             self.score = 0
@@ -276,6 +278,7 @@ class Game():
     def spawn_item(self):
         if self.player.player_rect.colliderect(self.item.rect) and self.player.isattacking:
             self.score += 1
+            self.timer += 5
             newpos = self.random_position()
             self.item.pos = (newpos[0], newpos[1])
             self.item.rect.topleft = self.item.pos
@@ -284,6 +287,11 @@ class Game():
     def random_position(self):
         pos = self.platforms[random.randrange(0,len(self.platforms))].pos
         return (pos[0] + 30, pos[1] - 45)
+    
+    def show_text(self, screen, text, pos):
+        font = pygame.font.Font(None, 36)
+        text_surface = font.render(text, True, (255, 255, 255))
+        screen.blit(text_surface, pos)
     
 def main():
     pygame.init()
