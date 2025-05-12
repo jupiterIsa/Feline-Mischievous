@@ -212,10 +212,13 @@ class Game():
     
     def draw_game(self,screen):
         self.player.draw(screen)
-        self.platform.draw(screen)
+        for platform in self.platforms:
+            platform.draw(screen)
     
     def update_game(self,dt):
-        self.player.update(dt,self.platform.rect)
+
+        for platform in self.platforms:
+            self.player.update(dt, platform.rect)
         self.lose_game()
 
     def lose_game(self):
