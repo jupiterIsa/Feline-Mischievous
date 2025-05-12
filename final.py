@@ -88,6 +88,8 @@ class Game():
     def __init__(self):
         self.player = Player()
         self.platform = Platform((000, 500), (800, 20))
+        self.timer = 10
+        self.score = 0
     
     def draw_game(self,screen):
         self.player.draw(screen)
