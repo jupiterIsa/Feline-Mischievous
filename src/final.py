@@ -58,28 +58,31 @@ class Player():
         self.pos = (self.pos[0] + dx, self.pos[1])
         self.player_rect.topleft = self.pos
         
-        if self.player_rect.colliderect(platform_rect):
-            if dx > 0:
-                self.pos = (platform_rect.left - self.size, self.pos[1])
-            elif dx < 0:
-                self.pos = (platform_rect.right, self.pos[1])
-            self.player_rect.topleft = self.pos
+        for platform in platform_rect:
+            if self.player_rect.colliderect(platform):
+                if dx > 0:
+                    self.pos = (platform.left - self.size, self.pos[1])
+                elif dx < 0:
+                    self.pos = (platform.right, self.pos[1])
+                self.player_rect.topleft = self.pos
         
 
         self.pos = (self.pos[0], self.pos[1] + dy)
         self.player_rect.topleft = self.pos
         
-        if self.player_rect.colliderect(platform_rect):
-            if dy > 0: 
-                self.pos = (self.pos[0], platform_rect.top - self.size)
-                self.gravity = 0
-                self.isJumping = False
-         
-            elif dy < 0:
-                self.pos = (self.pos[0], platform_rect.bottom)
-                self.gravity = 0
-        
-            self.player_rect.topleft = self.pos
+
+        for platform in platform_rect:
+            if self.player_rect.colliderect(platform):
+                if dy > 0: 
+                    self.pos = (self.pos[0], platform.top - self.size)
+                    self.gravity = 0
+                    self.isJumping = False
+            
+                elif dy < 0:
+                    self.pos = (self.pos[0], platform.bottom)
+                    self.gravity = 0
+            
+                self.player_rect.topleft = self.pos
 
     def attack(self):
         buttton = pygame.mouse.get_pressed()
