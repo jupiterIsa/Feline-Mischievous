@@ -301,7 +301,7 @@ def main():
     screen_width = info.current_w - 100
     screen_height = info.current_h - 100
 
-    screen = pygame.display.set_mode((screen_width, screen_height - 100))
+    screen = pygame.display.set_mode((screen_width, screen_height - 100), pygame.RESIZABLE)
     clock = pygame.time.Clock()
 
     background_image = pygame.image.load("src/Sprites/Background/Background.png").convert()
